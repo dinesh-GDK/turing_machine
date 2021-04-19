@@ -3,7 +3,7 @@
 #include"card.h"
 #include"cell.h"
 
-uint MAX_STEPS = 1000;
+const uint MAX_STEPS = 10000;
 
 void main(int argc, char *argv[]) {
 
@@ -24,7 +24,7 @@ void main(int argc, char *argv[]) {
 
     print_tape(tape_head);
 
-    printf("------------------------\n\n");
+    printf("Starting Execution...\n---------------------\n\n");
     struct Card *current_card = cards_head->next;
 
     int idx = 1;
@@ -48,7 +48,7 @@ void main(int argc, char *argv[]) {
         }
     }
 
-    printf("------------------------\n");
+    printf("---------------------\nEnd of Execution\n\n");
     printf("Result\n");
     print_tape(tape_head);
     printf("Number of ones: %d\n", tape_count_ones(tape_head));

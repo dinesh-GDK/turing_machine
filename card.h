@@ -64,7 +64,7 @@ uint validate_cards(struct Card *head) {
     uint ret = 1;
     printf("\nValidating Cards...\n");
 
-    struct Card *dummy = head;
+    struct Card *dummy = head->next;
     int count = 0;
     
     while(dummy != NULL) {
@@ -105,14 +105,17 @@ uint validate_cards(struct Card *head) {
 
 void print_cards(struct Card *head) {
 
+    printf("Printing cards...\n-----------------\n");
+
     struct Card *dummy = head->next;
     while(dummy != NULL) {
 
-        printf("\nCard ID: %d\n", dummy->id);
-        printf("W M N\n");
-        printf("%d %c %d\n", dummy->state[0].write, dummy->state[0].move, dummy->state[0].next_card);
-        printf("%d %c %d\n\n", dummy->state[1].write, dummy->state[1].move, dummy->state[1].next_card);
+        printf("\nCard - %d\n", dummy->id);
+        printf("S  W M N\n");
+        printf("0  %d %c %d\n", dummy->state[0].write, dummy->state[0].move, dummy->state[0].next_card);
+        printf("1  %d %c %d\n\n", dummy->state[1].write, dummy->state[1].move, dummy->state[1].next_card);
         
         dummy = dummy->next;
     }
+    printf("-----------------\n");
 }
