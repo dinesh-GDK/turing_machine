@@ -3,6 +3,7 @@
 #include"card.h"
 #include"cell.h"
 
+// maximum number of shifts done by the program
 const uint MAX_STEPS = 10000;
 
 void main(int argc, char *argv[]) {

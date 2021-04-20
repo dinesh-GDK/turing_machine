@@ -13,6 +13,16 @@ struct Card {
 };
 
 struct Card *get_cards(char *file) {
+    /*
+    Collects the data for the instruction cards from the file and creates a
+    singly linked list
+
+    args:
+        file - path to the file which has the data in the specified format
+    
+    ret:
+        head - pointer to the first instruction card
+    */
 
     FILE *fptr = fopen(file, "r");
     if(fptr == NULL) {
@@ -20,6 +30,7 @@ struct Card *get_cards(char *file) {
         exit(0);
     }
     
+    // creating the hault card
     struct Card *head = (struct Card*)malloc(sizeof(struct Card));
     head->id = 0;
     head->state[0].write = 0, head->state[0].move = 'S', head->state[0].next_card = 0;
@@ -46,6 +57,18 @@ struct Card *get_cards(char *file) {
 }
 
 struct Card *search_card(struct Card* head, uint target) {
+    /*
+    Searches the singly linked list of cards to get the card with the target
+    value as id
+
+    args:
+        head - pointer to the head of the singly linked list of cards
+        target - id value of the card to find
+    
+    ret:
+        if the card exists returns the pointer to the card
+        else it returns 'NULL'
+    */
 
     struct Card *dummy = head;
 
@@ -60,6 +83,16 @@ struct Card *search_card(struct Card* head, uint target) {
 }
 
 uint validate_cards(struct Card *head) {
+    /*
+    Validates the singly linked lists of cards
+
+    args:
+        head - the head of the singly linked lists of cards
+
+    ret:
+        if all cards are valid returns '1'
+        else returns '0'
+    */
     
     uint ret = 1;
     printf("\nValidating Cards...\n");
@@ -73,6 +106,7 @@ uint validate_cards(struct Card *head) {
         count++;
         
         for(int i = 0; i < 2; ++i) {
+            
             uint write = dummy->state[i].write == 0 || dummy->state[i].write == 1;
             uint move = dummy->state[i].move == 'L' || dummy->state[i].move == 'R' || dummy->state[i].move == 'S';
             struct Card *find = search_card(head, dummy->state[i].next_card);
@@ -104,6 +138,12 @@ uint validate_cards(struct Card *head) {
 }
 
 void print_cards(struct Card *head) {
+    /*
+    Prints all the cards in the singly linked lists
+
+    args:
+        head - pointer to the head of the card
+    */
 
     printf("Printing cards...\n-----------------\n");
 

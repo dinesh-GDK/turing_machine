@@ -8,6 +8,12 @@ struct Cell {
 };
 
 void print_tape(struct Cell *head) {
+    /*
+    Prints the tape (doubly linked list containing all cells)
+
+    args:
+        head - head of the tape (doubly linked list containing all cells)
+    */
 
     struct Cell *dummy = head;
 
@@ -23,6 +29,24 @@ void print_tape(struct Cell *head) {
 }
 
 struct Cell *move(struct Cell *head, char dir) {
+    /*
+    Moves the head of the tape (doubly linked list containing all cells)
+
+    args:
+        head - head of the tape (doubly linked list containing all cells)
+        dir - direction to move
+            L - move left
+            R - move right
+            S - stay
+            if excluded options are given the program will exit
+            (the validate_cards function will take care of this)
+
+    ret:
+        returns the head of the pointer moved to the specified direction
+
+    If when the shifted cell is non-exixting it creates a new cell and initialises
+    its valus to '0' and adds to the tape (doubly linked list containing all cells)
+    */
 
     if(dir == 'R') {
 
@@ -58,6 +82,14 @@ struct Cell *move(struct Cell *head, char dir) {
 }
 
 void get_initial_tape(struct Cell *head, char *file) {
+    /*
+    Creates the initial tape (doubly linked list) from the file with the 
+    specified format 
+
+    args:
+        head - the one cell created at the beginning
+        file - the file with the specified format to create tape
+    */
 
     FILE *fptr = fopen(file, "r");
     if(fptr == NULL) {
@@ -80,6 +112,12 @@ void get_initial_tape(struct Cell *head, char *file) {
 }
 
 uint validate_tape(struct Cell *head) {
+    /*
+    Validates the tape (the value of each cell must be '0'/'1')
+
+    args:
+        head - head of the tape (doubly linked list containing all cells)
+    */
 
     struct Cell* dummy = head;
 
@@ -97,18 +135,27 @@ uint validate_tape(struct Cell *head) {
     return 1;
 }
 
-uint tape_count_ones(struct Cell *cell) {
+uint tape_count_ones(struct Cell *head) {
+    /*
+    Counts the number of ones in the tape (doubly linked list containing all cells)
+
+    args:
+        head - head of the tape (doubly linked list containing all cells)
+
+    ret:
+        count - number of ones in the tape
+    */
     
     uint count = 0;
     
-    struct Cell *dummy = cell;
+    struct Cell *dummy = head;
     while(dummy != NULL) {
         if(dummy->val == 1)
             count++;
         dummy = dummy->prev;
     }
 
-    dummy = cell->next;
+    dummy = head->next;
     while(dummy != NULL) {
         if(dummy->val == 1)
             count++;
