@@ -52,6 +52,10 @@ struct Cell *move(struct Cell *head, char dir) {
 
         if(head->next == NULL) {
             struct Cell *temp = (struct Cell*)malloc(sizeof(struct Cell));
+            if(temp == NULL) {
+                printf("System out of memory");
+                exit(0);
+            }
             temp->val = 0;
             head->next = temp;
             temp->prev = head;
@@ -61,8 +65,13 @@ struct Cell *move(struct Cell *head, char dir) {
         head = head->next;
     
     } else if(dir == 'L') {
-            if(head->prev == NULL) {
+        
+        if(head->prev == NULL) {
             struct Cell *temp = (struct Cell *)malloc(sizeof(struct Cell));
+            if(temp == NULL) {
+                printf("System out of memory");
+                exit(0);
+            }
             temp->val = 0;
             head->prev = temp;
             temp->next = head;

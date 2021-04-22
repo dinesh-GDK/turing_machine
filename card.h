@@ -32,11 +32,19 @@ struct Card *get_cards(char *file) {
     
     // creating the hault card
     struct Card *head = (struct Card*)malloc(sizeof(struct Card));
+    if(head == NULL) {
+        printf("System out of memory");
+        exit(0);
+    }
     head->id = 0;
     head->state[0].write = 0, head->state[0].move = 'S', head->state[0].next_card = 0;
     head->state[1].write = 0, head->state[1].move = 'S', head->state[1].next_card = 0;
 
     head->next = (struct Card*)malloc(sizeof(struct Card));
+    if(head->next == NULL) {
+        printf("System out of memory");
+        exit(0);
+    }
     struct Card *dummy = head->next, *prev;
 
     while(fscanf(fptr, "%d", &dummy->id) != EOF) {
@@ -45,6 +53,10 @@ struct Card *get_cards(char *file) {
         fscanf(fptr, "%d %c %d", &dummy->state[1].write, &dummy->state[1].move, &dummy->state[1].next_card);
 
         dummy->next = (struct Card*)malloc(sizeof(struct Card));
+        if(dummy == NULL) {
+            printf("System out of memory");
+            exit(0);
+        }
         prev = dummy;
         dummy = dummy->next;
     }

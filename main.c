@@ -9,6 +9,10 @@ const uint MAX_STEPS = 10000;
 void main(int argc, char *argv[]) {
 
     struct Card *cards_head = get_cards(argv[1]);
+    if(cards_head == NULL) {
+        printf("System out of memory");
+        exit(0);
+    }
 
     if(validate_cards(cards_head) == 0)
         return;
@@ -16,6 +20,10 @@ void main(int argc, char *argv[]) {
     print_cards(cards_head);
 
     struct Cell *tape_head = (struct Cell*)malloc(sizeof(struct Cell));
+    if(tape_head == NULL) {
+        printf("System out of memory");
+        exit(0);
+    }
     tape_head->prev = NULL, tape_head->next = NULL;
 
     get_initial_tape(tape_head, argv[2]);
