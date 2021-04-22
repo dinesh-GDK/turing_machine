@@ -94,6 +94,34 @@ struct Card *search_card(struct Card* head, uint target) {
     return NULL;
 }
 
+uint find_duplicacy(struct Card *head, uint target) {
+    /*
+    Searches the singly linked list for duplicacy with the target id
+    args:
+        head - the head of the singly linked lists of cards
+        target - id value of the taarget card
+
+    ret:
+        0 if duplicate is found
+        1 if duplicate is not found
+    */
+
+    uint count = 0;
+    struct Card *dummy = head;
+    while(dummy != NULL) {
+
+        if(dummy->id == target)
+            count++;
+
+        dummy = dummy->next;
+    }
+
+    if(count > 1)
+        return 0;
+
+    return 1;
+}
+
 uint validate_cards(struct Card *head) {
     /*
     Validates the singly linked lists of cards
@@ -109,13 +137,21 @@ uint validate_cards(struct Card *head) {
     uint ret = 1;
     printf("\nValidating Cards...\n");
 
-    struct Card *dummy = head->next;
-    int count = 0;
+    struct Card *dummy = head;
+    int cards_count = 0;
     
-    while(dummy != NULL) {
+    while(dummy->next != NULL) {
+
+        dummy = dummy->next;
 
         uint is_valid_card = 1;
-        count++;
+        cards_count++;
+
+        if(find_duplicacy(head, dummy->id) == 0) {
+            printf("Card ID: %d is duplicate\n", dummy->id);
+            ret = 0;
+            continue;
+        }
         
         for(int i = 0; i < 2; ++i) {
             
@@ -136,13 +172,11 @@ uint validate_cards(struct Card *head) {
             printf("Card ID: %d is not valid\n", dummy->id);
             ret = 0;
         }
-
-        dummy = dummy->next;
     }
 
     printf("\n");
 
-    if(count < 1) {
+    if(cards_count < 1) {
         printf("Invalid: No cards availabl\n");
         return 0;
     }
