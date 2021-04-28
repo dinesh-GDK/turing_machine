@@ -36,8 +36,11 @@ void main(int argc, char *argv[]) {
     printf("Starting Execution...\n---------------------\n\n");
     struct Card *current_card = cards_head->next;
 
-    int idx = 1;
+    int idx = 0;
     while(1) {
+
+        printf("STEP: %d\n", idx);
+        print_tape(tape_head);
 
         if(current_card->id == 0)
             break;
@@ -46,9 +49,6 @@ void main(int argc, char *argv[]) {
         tape_head->val = current_card->state[temp_val].write;
         tape_head = move(tape_head, current_card->state[temp_val].move);
         current_card = search_card(cards_head, current_card->state[temp_val].next_card);
-
-        printf("STEP: %d\n", idx);
-        print_tape(tape_head);
 
         idx++;
         if(idx == MAX_STEPS+1) {
