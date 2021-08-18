@@ -16,7 +16,7 @@ A regular turing machine instruction card would look something like this
 |1      |  1    |  R    |   3       |
 
 First it contains the card number\
-Then the actiosn to take when the two symbols are encountered in the tape\
+Then the actions to take when the two symbols are encountered in the tape\
 For example in the card shown above\
 If `0` is encountered write `0` to the tape, shift left and go to card 2\
 If `1` is encountered write `1` to the tape, shift right and go to card 3
