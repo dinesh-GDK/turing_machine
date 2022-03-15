@@ -1,7 +1,7 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include"card.h"
-#include"cell.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "card.h"
+#include "cell.h"
 
 // maximum number of shifts done by the program
 const uint MAX_STEPS = 10000;
@@ -61,4 +61,7 @@ void main(int argc, char *argv[]) {
     printf("Result\n");
     print_tape(tape_head);
     printf("Number of ones: %d\n", tape_count_ones(tape_head));
+
+    free_cards(cards_head);
+    free_tape(tape_head);
 }

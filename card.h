@@ -205,3 +205,19 @@ void print_cards(struct Card *head) {
     }
     printf("-----------------\n");
 }
+
+void free_cards(struct Card *head) {
+    /*
+    Frees the memory of cards
+
+    args:
+        head - pointer to the head of the card
+    */
+
+   struct Card *temp1 = head, *temp2;
+   while(temp1 != NULL) {
+        temp2 = temp1->next;
+        free(temp1);
+        temp1 = temp2;
+   }
+}

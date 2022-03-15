@@ -173,3 +173,19 @@ uint tape_count_ones(struct Cell *head) {
 
     return count;
 }
+
+void free_tape(struct Cell *head) {
+    /*
+    Frees the memory of cells
+
+    args:
+        head - pointer to the head of the cell
+    */
+
+   struct Cell *temp1 = head, *temp2;
+   while(temp1 != NULL) {
+        temp2 = temp1->next;
+        free(temp1);
+        temp1 = temp2;
+   }
+}
