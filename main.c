@@ -14,8 +14,10 @@ void main(int argc, char *argv[]) {
         exit(0);
     }
 
-    if(validate_cards(cards_head) == 0)
+    if(validate_cards(cards_head) == 0) {
+        free_cards(cards_head);
         return;
+    }
 
     print_cards(cards_head);
 
@@ -28,8 +30,11 @@ void main(int argc, char *argv[]) {
 
     get_initial_tape(tape_head, argv[2]);
 
-    if(validate_tape(tape_head) == 0)
+    if(validate_tape(tape_head) == 0) {
+        free_cards(cards_head);
+        free_tape(tape_head);
         return;
+    }
 
     print_tape(tape_head);
 
@@ -53,6 +58,8 @@ void main(int argc, char *argv[]) {
         idx++;
         if(idx == MAX_STEPS+1) {
             printf("Maximum steps exeeced\n");
+            free_cards(cards_head);
+            free_tape(tape_head);
             return;
         }
     }

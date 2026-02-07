@@ -182,7 +182,13 @@ void free_tape(struct Cell *head) {
         head - pointer to the head of the cell
     */
 
-   struct Cell *temp1 = head, *temp2;
+   // First, traverse to the leftmost cell
+   struct Cell *temp1 = head;
+   while(temp1->prev != NULL)
+       temp1 = temp1->prev;
+
+   // Now free all cells from left to right
+   struct Cell *temp2;
    while(temp1 != NULL) {
         temp2 = temp1->next;
         free(temp1);
